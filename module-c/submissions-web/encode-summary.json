@@ -1,0 +1,417 @@
+{
+  "settings": "H.264 CRF28 max-long-edge 1080 AAC96k faststart",
+  "count": 58,
+  "failed": [],
+  "before_mb": 1107.8,
+  "after_mb": 98.8,
+  "files": [
+    "andersonbrooklynrain_476048_34090814_Anderson_Fake_Glitch.mp4",
+    "andersonbrooklynrain_476048_34090815_Anderson_Fake_Real.mp4",
+    "andersonbrooklynrain_476048_34090817_Anderson_Genuine_Glitch.mp4",
+    "andersonbrooklynrain_476048_34090819_Anderson_Genuine_Real.mp4",
+    "andersonsamuel_493024_34185738_s.anderson_fake_glitch-1.mp4",
+    "andersonsamuel_493024_34185740_s.anderson_fake_real-1.mp4",
+    "andersonsamuel_493024_34185742_s.anderson_genuine_glitch-1.mp4",
+    "arinoanthonypeter_276561_34181659_arino_genuine_glitch.mp4",
+    "arinoanthonypeter_276561_34181664_arino_fake_glitch.mp4",
+    "arinoanthonypeter_276561_34181674_arino_fake_real.mp4",
+    "bullemilyimogene_278578_34107262_bull_genuine_real.mp4",
+    "bullemilyimogene_278578_34107263_bull_fake_real.mp4",
+    "bullemilyimogene_278578_34107264_bull_fake_glitch.mp4",
+    "bullemilyimogene_278578_34107265_bull_genuine_glitch.mp4",
+    "huttolauren_488766_34098641_Hutto_Fake_Real.mp4",
+    "huttolauren_488766_34098647_Hutto_genuine_glitch.mp4",
+    "huttolauren_488766_34098657_Hutto_Fake_Glitch.mp4",
+    "imposter2_fake_glitch.mp4",
+    "imposter2_fake_real.mp4",
+    "imposter2_genuine_glitch.mp4",
+    "imposter_Genuine_Glitch.mp4",
+    "imposter_fake_glitch.mp4",
+    "imposter_fake_real.mp4",
+    "jennessben_376277_34180166_Jenness_fake_glitch.mp4",
+    "jennessben_376277_34180176_Jenness_fake_real.mp4",
+    "jennessben_376277_34180648_Jenness_genuine_glitch.mp4",
+    "malonemadelinejean_364503_34174005_Malone_Genuine_Real.mp4",
+    "malonemadelinejean_364503_34174089_Malone_Fake_Glitch.mp4",
+    "malonemadelinejean_364503_34174121_Malone_Fake_Real.mp4",
+    "malonemadelinejean_364503_34174788_Malone_Genuine_Glitch.mp4",
+    "nelsoncameronben_204190_34117657_nelson_fake_real.mp4",
+    "nelsoncameronben_204190_34117660_nelson_fake_glitch.mp4",
+    "nelsoncameronben_204190_34117674_nelson_genuine_glitch.mp4",
+    "nixonelil_239652_34181494_Nixon_Fake_Glitch.mp4",
+    "nixonelil_239652_34181505_Nixon_fake_real.mp4",
+    "nixonelil_239652_34181511_Nixon_Genuine_Glitch.mp4",
+    "nixonelil_239652_34181598_Nixon_genuine_real.mp4",
+    "peavyava_278072_34118617_Peavy_fake_glitch.mp4",
+    "peavyava_278072_34118622_Peavy_fake_real.mp4",
+    "peavyava_278072_34118626_Peavy_genuine_glitch.mp4",
+    "scotthunterjames_275330_34185828_Scott_fake_glitch.mp4",
+    "scotthunterjames_275330_34185837_Scott_genuine_real.mp4",
+    "scotthunterjames_275330_34185839_Scott_fake_real.mp4",
+    "scotthunterjames_275330_34185853_Scott_genuine_glitch.mp4",
+    "skorpenskeolive_354157_34173268_Skorpenske_genuine_real.mp4",
+    "skorpenskeolive_354157_34174075_Skorpenske_genuine_glitch.mp4",
+    "skorpenskeolive_354157_34174817_Skorpenske_fake_real.mp4",
+    "skorpenskeolive_354157_34180511_Skorpenske_fake_glitch.mp4",
+    "stewartbreezy_337166_34132342_stewart_fake_glitch.mp4",
+    "stewartbreezy_337166_34132343_stewart_fake_real.mp4",
+    "stewartbreezy_337166_34132344_stewart_genuine_glitch.mp4",
+    "thomasmeimcdonald_276692_34181024_Thomas_Genuine_Glitch-1.mp4",
+    "thomasmeimcdonald_276692_34181026_Thomas_Fake_Real-1.mp4",
+    "thomasmeimcdonald_276692_34181027_Thomas_Fake_Glitch-1.mp4",
+    "thomasmeimcdonald_276692_34181028_Thomas_Genuine_Real-1.mp4",
+    "woolarderin_371756_34142162_Woolard_Fake_Glitch.mp4",
+    "woolarderin_371756_34142163_Woolard_Fake_Real.mp4",
+    "woolarderin_371756_34142177_Woolard_Genuine_Glitch.mp4"
+  ],
+  "details": [
+    {
+      "file": "andersonbrooklynrain_476048_34090814_Anderson_Fake_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 8927900,
+      "after_bytes": 720879
+    },
+    {
+      "file": "andersonbrooklynrain_476048_34090815_Anderson_Fake_Real.mp4",
+      "ok": true,
+      "before_bytes": 7283857,
+      "after_bytes": 769174
+    },
+    {
+      "file": "andersonbrooklynrain_476048_34090817_Anderson_Genuine_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 6568608,
+      "after_bytes": 675749
+    },
+    {
+      "file": "andersonbrooklynrain_476048_34090819_Anderson_Genuine_Real.mp4",
+      "ok": true,
+      "before_bytes": 10356764,
+      "after_bytes": 1308343
+    },
+    {
+      "file": "andersonsamuel_493024_34185738_s.anderson_fake_glitch-1.mp4",
+      "ok": true,
+      "before_bytes": 7700558,
+      "after_bytes": 812199
+    },
+    {
+      "file": "andersonsamuel_493024_34185740_s.anderson_fake_real-1.mp4",
+      "ok": true,
+      "before_bytes": 11348985,
+      "after_bytes": 808304
+    },
+    {
+      "file": "andersonsamuel_493024_34185742_s.anderson_genuine_glitch-1.mp4",
+      "ok": true,
+      "before_bytes": 12985647,
+      "after_bytes": 731355
+    },
+    {
+      "file": "arinoanthonypeter_276561_34181659_arino_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 16473037,
+      "after_bytes": 1102473
+    },
+    {
+      "file": "arinoanthonypeter_276561_34181664_arino_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 19800223,
+      "after_bytes": 1621442
+    },
+    {
+      "file": "arinoanthonypeter_276561_34181674_arino_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 7422195,
+      "after_bytes": 326821
+    },
+    {
+      "file": "bullemilyimogene_278578_34107262_bull_genuine_real.mp4",
+      "ok": true,
+      "before_bytes": 5363279,
+      "after_bytes": 380395
+    },
+    {
+      "file": "bullemilyimogene_278578_34107263_bull_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 5511907,
+      "after_bytes": 353744
+    },
+    {
+      "file": "bullemilyimogene_278578_34107264_bull_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 4763371,
+      "after_bytes": 162884
+    },
+    {
+      "file": "bullemilyimogene_278578_34107265_bull_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 4735349,
+      "after_bytes": 774546
+    },
+    {
+      "file": "huttolauren_488766_34098641_Hutto_Fake_Real.mp4",
+      "ok": true,
+      "before_bytes": 9575535,
+      "after_bytes": 520874
+    },
+    {
+      "file": "huttolauren_488766_34098647_Hutto_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 17145109,
+      "after_bytes": 798813
+    },
+    {
+      "file": "huttolauren_488766_34098657_Hutto_Fake_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 76512802,
+      "after_bytes": 2150515
+    },
+    {
+      "file": "imposter2_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 22427147,
+      "after_bytes": 1905715
+    },
+    {
+      "file": "imposter2_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 3064420,
+      "after_bytes": 792276
+    },
+    {
+      "file": "imposter2_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 16330485,
+      "after_bytes": 1642146
+    },
+    {
+      "file": "imposter_Genuine_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 18419175,
+      "after_bytes": 1943283
+    },
+    {
+      "file": "imposter_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 15120025,
+      "after_bytes": 10588146
+    },
+    {
+      "file": "imposter_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 1204615,
+      "after_bytes": 279427
+    },
+    {
+      "file": "jennessben_376277_34180166_Jenness_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 4397936,
+      "after_bytes": 1122362
+    },
+    {
+      "file": "jennessben_376277_34180176_Jenness_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 4201210,
+      "after_bytes": 247254
+    },
+    {
+      "file": "jennessben_376277_34180648_Jenness_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 2524640,
+      "after_bytes": 643752
+    },
+    {
+      "file": "malonemadelinejean_364503_34174005_Malone_Genuine_Real.mp4",
+      "ok": true,
+      "before_bytes": 4877652,
+      "after_bytes": 731961
+    },
+    {
+      "file": "malonemadelinejean_364503_34174089_Malone_Fake_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 19922045,
+      "after_bytes": 2083544
+    },
+    {
+      "file": "malonemadelinejean_364503_34174121_Malone_Fake_Real.mp4",
+      "ok": true,
+      "before_bytes": 14181436,
+      "after_bytes": 1095206
+    },
+    {
+      "file": "malonemadelinejean_364503_34174788_Malone_Genuine_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 18683516,
+      "after_bytes": 2458839
+    },
+    {
+      "file": "nelsoncameronben_204190_34117657_nelson_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 12890354,
+      "after_bytes": 837375
+    },
+    {
+      "file": "nelsoncameronben_204190_34117660_nelson_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 6016929,
+      "after_bytes": 1133693
+    },
+    {
+      "file": "nelsoncameronben_204190_34117674_nelson_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 22071161,
+      "after_bytes": 2778659
+    },
+    {
+      "file": "nixonelil_239652_34181494_Nixon_Fake_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 61360268,
+      "after_bytes": 5655036
+    },
+    {
+      "file": "nixonelil_239652_34181505_Nixon_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 18181714,
+      "after_bytes": 731650
+    },
+    {
+      "file": "nixonelil_239652_34181511_Nixon_Genuine_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 160243982,
+      "after_bytes": 12531551
+    },
+    {
+      "file": "nixonelil_239652_34181598_Nixon_genuine_real.mp4",
+      "ok": true,
+      "before_bytes": 54942348,
+      "after_bytes": 7421821
+    },
+    {
+      "file": "peavyava_278072_34118617_Peavy_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 3623570,
+      "after_bytes": 543123
+    },
+    {
+      "file": "peavyava_278072_34118622_Peavy_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 2163770,
+      "after_bytes": 270450
+    },
+    {
+      "file": "peavyava_278072_34118626_Peavy_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 1531173,
+      "after_bytes": 506167
+    },
+    {
+      "file": "scotthunterjames_275330_34185828_Scott_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 2318336,
+      "after_bytes": 835877
+    },
+    {
+      "file": "scotthunterjames_275330_34185837_Scott_genuine_real.mp4",
+      "ok": true,
+      "before_bytes": 102607749,
+      "after_bytes": 1340307
+    },
+    {
+      "file": "scotthunterjames_275330_34185839_Scott_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 21245043,
+      "after_bytes": 660108
+    },
+    {
+      "file": "scotthunterjames_275330_34185853_Scott_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 17169090,
+      "after_bytes": 2326404
+    },
+    {
+      "file": "skorpenskeolive_354157_34173268_Skorpenske_genuine_real.mp4",
+      "ok": true,
+      "before_bytes": 49638107,
+      "after_bytes": 1541250
+    },
+    {
+      "file": "skorpenskeolive_354157_34174075_Skorpenske_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 62239799,
+      "after_bytes": 7611177
+    },
+    {
+      "file": "skorpenskeolive_354157_34174817_Skorpenske_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 1398715,
+      "after_bytes": 375217
+    },
+    {
+      "file": "skorpenskeolive_354157_34180511_Skorpenske_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 23670712,
+      "after_bytes": 1724248
+    },
+    {
+      "file": "stewartbreezy_337166_34132342_stewart_fake_glitch.mp4",
+      "ok": true,
+      "before_bytes": 2156398,
+      "after_bytes": 329225
+    },
+    {
+      "file": "stewartbreezy_337166_34132343_stewart_fake_real.mp4",
+      "ok": true,
+      "before_bytes": 3065504,
+      "after_bytes": 620944
+    },
+    {
+      "file": "stewartbreezy_337166_34132344_stewart_genuine_glitch.mp4",
+      "ok": true,
+      "before_bytes": 2987117,
+      "after_bytes": 490923
+    },
+    {
+      "file": "thomasmeimcdonald_276692_34181024_Thomas_Genuine_Glitch-1.mp4",
+      "ok": true,
+      "before_bytes": 4800386,
+      "after_bytes": 822126
+    },
+    {
+      "file": "thomasmeimcdonald_276692_34181026_Thomas_Fake_Real-1.mp4",
+      "ok": true,
+      "before_bytes": 10183619,
+      "after_bytes": 368730
+    },
+    {
+      "file": "thomasmeimcdonald_276692_34181027_Thomas_Fake_Glitch-1.mp4",
+      "ok": true,
+      "before_bytes": 4684022,
+      "after_bytes": 889905
+    },
+    {
+      "file": "thomasmeimcdonald_276692_34181028_Thomas_Genuine_Real-1.mp4",
+      "ok": true,
+      "before_bytes": 13132700,
+      "after_bytes": 504160
+    },
+    {
+      "file": "woolarderin_371756_34142162_Woolard_Fake_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 25694519,
+      "after_bytes": 2802980
+    },
+    {
+      "file": "woolarderin_371756_34142163_Woolard_Fake_Real.mp4",
+      "ok": true,
+      "before_bytes": 29058161,
+      "after_bytes": 3169549
+    },
+    {
+      "file": "woolarderin_371756_34142177_Woolard_Genuine_Glitch.mp4",
+      "ok": true,
+      "before_bytes": 64719057,
+      "after_bytes": 5187981
+    }
+  ]
+}

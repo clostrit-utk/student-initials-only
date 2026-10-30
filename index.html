@@ -390,6 +390,17 @@ body.motion-paused *::after{
 .int-name{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--text);margin-bottom:8px;line-height:1.3;position:relative;z-index:1;}
 .int-focus{font-size:10px;color:var(--text2);line-height:1.6;position:relative;z-index:1;}
 .int-outputs{margin-top:10px;font-size:9px;color:var(--text3);line-height:1.5;position:relative;z-index:1;border-top:1px solid var(--border);padding-top:10px;}
+.int-results-links{
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  margin-top:12px;position:relative;z-index:1;
+}
+.int-results-link{
+  display:inline-block;
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cream);text-decoration:none;border-bottom:1px solid var(--border2);
+  padding-bottom:2px;transition:color .2s,border-color .2s;
+}
+.int-results-link:hover{color:var(--red);border-color:var(--red);}
 
 /* WEEKLY SEQUENCE */
 .weeks-table{width:100%;border-collapse:collapse;}
@@ -1381,7 +1392,11 @@ html[data-theme="light"] body.accessibility-mode [style*="color:var(--red)"]{
       <div class="int-dur">Short · 2 Weeks</div>
       <div class="int-name">Glitch, Noise, and the Uncanny</div>
       <p class="int-focus">This module treats error, ambiguity, and machine failure as productive design tools. As generative AI improves, identifying and creating salient glitches amid AI slop becomes a moral imperative. Glitches expose the limits of machine reasoning while opening space for critique, speculation, and disciplinary invention. They are fascinating, often beautiful artifacts of imperfect systems.</p>
-      <div class="int-outputs">Outputs: curated error archives · uncanny spatial studies · speculative proposals</div>
+      <div class="int-outputs">Outputs: unsettlingly fake and surprisingly genuine video</div>
+      <div class="int-results-links">
+        <a class="int-results-link" href="module-c-results.html">View student results as gallery →</a>
+        <a class="int-results-link" href="module-c-game.html">View student results as a game →</a>
+      </div>
     </div>
     <div class="int-card">
       <div class="int-letter">D</div>
@@ -2430,7 +2445,7 @@ const modData={
   'kickoff':{tag:'Full Class · Week 1',title:'Kick-Off',dur:'Aug 18–20 · Week 1',desc:'The opening event that frames the intellectual, ethical, and professional stakes of human-centered AI in design. Students establish a shared vocabulary, encounter the core premise of the course, and are introduced to the modular structure that will guide their semester.',outputs:'Opening lecture · Group discussion · Vocabulary workshop · Shared reading'},
   'A':{tag:'Short Intensive',title:'AI as Design Accelerator',dur:'Sep 3–15 · Two-week module',desc:'This module tests where AI genuinely expands design capacity and where it simply produces false speed. Students prototype hybrid workflows across precedent analysis, ideation, iteration, comparative testing, and communication. The goal is to build discernment about where AI accelerates thinking and where it merely accelerates production.',outputs:'Workflow maps · Iteration logs · Precedent-to-prototype studies'},
   'B':{tag:'Short Intensive',title:'Reading Big Data at the Human Scale',dur:'Sep 17–Oct 1 · Two-week module',desc:'This module tests where AI genuinely expands design capacity and where it simply produces false speed. Students prototype hybrid workflows across precedent analysis, ideation, iteration, comparative testing, and communication. The goal is to build discernment about when acceleration supports judgment and when it undermines it.',outputs:'Workflow maps · Iterative concept studies · Reflective process audits'},
-  'C':{tag:'Short Intensive',title:'Glitch, Noise, and the Uncanny',dur:'Weeks 10–11 · Oct 20–29',desc:'This module treats error, ambiguity, and machine failure as productive design tools. As generative AI improves, identifying and creating salient glitches amid AI slop becomes a moral imperative. Glitches expose the limits of machine reasoning while opening space for critique, speculation, and disciplinary invention. They are fascinating, often beautiful artifacts of imperfect systems.',outputs:'Curated error archives · Uncanny spatial studies · Speculative proposals'},
+  'C':{tag:'Short Intensive',title:'Glitch, Noise, and the Uncanny',dur:'Weeks 10–11 · Oct 20–29',desc:'This module treats error, ambiguity, and machine failure as productive design tools. As generative AI improves, identifying and creating salient glitches amid AI slop becomes a moral imperative. Glitches expose the limits of machine reasoning while opening space for critique, speculation, and disciplinary invention. They are fascinating, often beautiful artifacts of imperfect systems.',outputs:'Unsettlingly fake and surprisingly genuine video'},
   'D':{tag:'Short Intensive',title:'Living Systems and Ecological Intelligence',dur:'Nov 5–17 · Two-week module, adjusted for Election Day',desc:'This module examines how AI can support environmentally responsive design by helping students interpret climate, material, landscape, and building-performance conditions as interconnected systems. It moves beyond sustainability as a generalized aspiration toward a more precise understanding of environmental consequence, design agency, and long-term impact.',outputs:'Ecological systems maps · Scenario studies · Material response diagrams · Short design proposals'},
   'mid':{tag:'Full Class · Week 7',title:'Mid-Semester Symposium',dur:'Oct 1 · Public/Internal Event',desc:'A focused forum that brings external voices — visiting critics, Gensler practitioners, and allied professionals — into the course as a catalyst for critique, recalibration, and cross-disciplinary exchange. Students present midterm work and receive feedback that shapes the direction and focus of the second half of the semester.',outputs:'Midterm Review · Mini Showcase presentations · Project recalibration'},
   'longA':{tag:'Long Core Module',title:'Core 1: AI-Mediated Ethics',dur:'Aug 25–Sep 1 · UT-Directed · Jian Huang guest lectures Aug 25/27',desc:'This module frames ethics as an infrastructural condition of AI-assisted design rather than an afterthought. Students examine bias, visibility, dataset politics, authorship, disclosure, and representational harm, then test how ethical judgment can become an active design capacity. Jian Huang’s two-day lecture sequence anchors the opening of the module through AI literacy, data visualization, public knowledge, and accountable interpretation. Led by Rana Abudayyeh.',outputs:'Ethics audits · Case-study analyses · Disclosure protocols · Synthetic media critiques · AI Position Visual Essay & Short Film'},
