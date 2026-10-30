@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module C Game — Prompting Impact Fall 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syncopate:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #090909;
+        --cream: #e8dcc8;
+        --muted: rgba(232, 220, 200, 0.55);
+        --border: rgba(232, 220, 200, 0.12);
+        --red: #c8102e;
+        --ok: #7ec8a0;
+        --mono: "DM Mono", monospace;
+        --display: "Syncopate", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--cream);
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: 0.9rem 1.25rem;
+        background: rgba(9, 9, 9, 0.94);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+      }
+      .kicker {
+        margin: 0;
+        color: var(--muted);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+      h1 {
+        margin: 0.25rem 0 0;
+        font-family: var(--display);
+        font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .header-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+        align-items: center;
+        color: var(--muted);
+        text-align: right;
+      }
+      a {
+        color: var(--cream);
+      }
+      #progress {
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 11px;
+        color: var(--cream);
+      }
+      button {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--cream);
+        font: inherit;
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+      button:hover {
+        border-color: var(--cream);
+        background: rgba(232, 220, 200, 0.08);
+      }
+      button:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+      button.is-pick-genuine {
+        border-color: rgba(126, 200, 160, 0.45);
+      }
+      button.is-pick-fake {
+        border-color: rgba(200, 16, 46, 0.55);
+      }
+      button.is-correct {
+        border-color: var(--ok);
+        background: rgba(126, 200, 160, 0.12);
+        color: var(--ok);
+      }
+      button.is-wrong {
+        border-color: var(--red);
+        background: rgba(200, 16, 46, 0.12);
+        color: #f0a0a8;
+      }
+      .empty {
+        padding: 2rem 1.5rem;
+        color: var(--muted);
+      }
+      .feed {
+        display: flex;
+        flex-direction: column;
+      }
+      .round {
+        min-height: calc(100dvh - 68px);
+        height: calc(100dvh - 68px);
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        gap: 0.65rem;
+        padding: 0.75rem 1rem 1rem;
+        border-bottom: 1px solid var(--border);
+        scroll-margin-top: 72px;
+      }
+      .round-top {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: baseline;
+      }
+      .round-index {
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+      .round-prompt {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(0.75rem, 2vw, 0.95rem);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .round-note {
+        flex: 0 0 auto;
+        margin: 0;
+        max-width: 52rem;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .round-note strong {
+        color: var(--cream);
+        font-weight: 500;
+      }
+      .stage {
+        flex: 1 1 auto;
+        width: 100%;
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        background: #000;
+        object-fit: contain;
+      }
+      .guesses {
+        flex: 0 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        width: min(100%, 720px);
+        margin: 0 auto;
+      }
+      .reveal {
+        flex: 0 0 auto;
+        width: min(100%, 720px);
+        margin: 0 auto;
+        min-height: 2.8rem;
+      }
+      .reveal[hidden] {
+        display: none;
+      }
+      .reveal-result {
+        margin: 0 0 0.25rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+      .reveal-result.is-correct {
+        color: var(--ok);
+      }
+      .reveal-result.is-wrong {
+        color: #f0a0a8;
+      }
+      .reveal-detail {
+        margin: 0;
+        color: var(--muted);
+      }
+      .reveal-detail strong {
+        color: var(--cream);
+        font-weight: 500;
+      }
+      .finale {
+        min-height: calc(100dvh - 68px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.85rem;
+        padding: 2rem 1.5rem;
+        scroll-margin-top: 72px;
+      }
+      .finale h2 {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(1.2rem, 4vw, 2rem);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .finale p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 28rem;
+      }
+      .finale-score {
+        font-size: clamp(2rem, 8vw, 4rem);
+        color: var(--cream);
+        letter-spacing: 0.04em;
+      }
+      .finale-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="kicker">Prompting Impact · Fall 2026</p>
+        <h1>Module C Game</h1>
+      </div>
+      <div class="header-meta">
+        <span id="progress">—</span>
+        <a href="module-c-results.html">Gallery</a>
+        <a href="index.html">← Course site</a>
+      </div>
+    </header>
+
+    <p class="empty" id="status" hidden></p>
+    <div class="feed" id="feed"></div>
+
+    <script type="module">
+      const ROUND_COUNT = 20;
+      const TYPES = [
+        { key: "Genuine Real", pattern: /genuine[_\s-]*real/i, family: "real", authenticity: "genuine" },
+        { key: "Fake Real", pattern: /fake[_\s-]*real/i, family: "real", authenticity: "fake" },
+        { key: "Genuine Glitch", pattern: /genuine[_\s-]*glitch/i, family: "glitch", authenticity: "genuine" },
+        { key: "Fake Glitch", pattern: /fake[_\s-]*glitch/i, family: "glitch", authenticity: "fake" },
+      ];
+
+      const FIRST_OVERRIDES = {
+        brooklynrain: "Brooklyn Rain",
+        emilyimogene: "Emily Imogene",
+        cameronben: "Cameron Ben",
+        madelinejean: "Madeline Jean",
+        meimcdonald: "Mei Mcdonald",
+        anthonypeter: "Anthony Peter",
+        hunterjames: "Hunter James",
+      };
+
+      const FAMILIES = {
+        glitch: {
+          label: "Glitch",
+          prompt: "Genuine Glitch or Fake Glitch?",
+          options: [
+            { key: "Genuine Glitch", label: "Genuine Glitch", authenticity: "genuine" },
+            { key: "Fake Glitch", label: "Fake Glitch", authenticity: "fake" },
+          ],
+        },
+        real: {
+          label: "Real",
+          prompt: "Genuine Real or Fake Real?",
+          options: [
+            { key: "Genuine Real", label: "Genuine Real", authenticity: "genuine" },
+            { key: "Fake Real", label: "Fake Real", authenticity: "fake" },
+          ],
+        },
+      };
+
+      const INTRO_NOTES = {
+        glitch:
+          "A <strong>genuine glitch</strong> is the result of directly modifying the raw data of a video file in a manner that produces a noticeable visual effect that doesn’t completely undermine the content of the video. Or, the use of generative AI to a point of secondary failure. Six fingers on a human hand is a classic example. A <strong>fake glitch</strong> shortcuts the process by producing something that mimics those effects with a filter or by explicitly prompting an AI to make something that looks like a glitch.",
+        real:
+          "A <strong>genuine real</strong> video is captured without the use of AI in any fashion. A <strong>fake real</strong> video attempts to look real, but is actually produced with generative AI.",
+      };
+
+      const feed = document.getElementById("feed");
+      const status = document.getElementById("status");
+      const progressEl = document.getElementById("progress");
+
+      /** @type {Array<{ file: string, path: string, student: string, type: string, family: string, authenticity: string }>} */
+      let allClips = [];
+      let answered = 0;
+      let correct = 0;
+
+      function titleCase(token) {
+        if (!token) return "";
+        return token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+      }
+
+      function detectType(filename) {
+        for (const type of TYPES) {
+          if (type.pattern.test(filename)) return type;
+        }
+        return null;
+      }
+
+      function parseStudent(filename) {
+        const lower = filename.toLowerCase();
+        if (lower.startsWith("imposter2")) return "Imposter 2";
+        if (lower.startsWith("imposter")) return "Imposter 1";
+
+        const parts = filename.split("_");
+        if (parts.length < 4) return filename;
+
+        const prefix = parts[0].toLowerCase();
+        let lastToken = parts[3].replace(/^([a-z]\.)+/i, "");
+        const lastNorm = lastToken.toLowerCase().replace(/[^a-z0-9]/g, "");
+        if (!lastNorm || !prefix.startsWith(lastNorm)) {
+          return titleCase(prefix);
+        }
+        const firstNorm = prefix.slice(lastNorm.length);
+        const firstName = FIRST_OVERRIDES[firstNorm] || titleCase(firstNorm);
+        const lastName = titleCase(lastToken);
+        return `${firstName} ${lastName}`.trim();
+      }
+
+      function shuffle(list) {
+        const arr = [...list];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      function pickRounds(clips) {
+        const byFamily = {
+          glitch: shuffle(clips.filter((c) => c.family === "glitch")),
+          real: shuffle(clips.filter((c) => c.family === "real")),
+        };
+        const rounds = [];
+        const used = { glitch: 0, real: 0 };
+
+        for (let i = 0; i < ROUND_COUNT; i++) {
+          const family = i % 2 === 0 ? "glitch" : "real";
+          const pool = byFamily[family];
+          if (!pool.length) throw new Error(`No ${family} videos available.`);
+          const clip = pool[used[family] % pool.length];
+          used[family] += 1;
+          rounds.push({ index: i, family, clip });
+        }
+        return rounds;
+      }
+
+      function updateProgress() {
+        progressEl.textContent = `${answered} / ${ROUND_COUNT} · ${correct} correct`;
+      }
+
+      function scrollToEl(el) {
+        if (!el) return;
+        requestAnimationFrame(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+
+      function playVisibleVideos() {
+        const videos = [...feed.querySelectorAll("video")];
+        for (const video of videos) {
+          const rect = video.getBoundingClientRect();
+          const visible = rect.top < window.innerHeight * 0.85 && rect.bottom > 80;
+          if (visible) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      }
+
+      function buildFinale() {
+        const pct = Math.round((correct / ROUND_COUNT) * 100);
+        const finale = document.createElement("section");
+        finale.className = "finale";
+        finale.id = "finale";
+        finale.innerHTML = `
+          <p class="kicker">Round complete</p>
+          <h2>Your score</h2>
+          <div class="finale-score">${pct}%</div>
+          <p>${correct} of ${ROUND_COUNT} correct — genuine vs fake, alternating glitch and real.</p>
+          <div class="finale-actions">
+            <button type="button" id="play-again">Play again</button>
+            <a href="module-c-results.html">View gallery →</a>
+          </div>
+        `;
+        finale.querySelector("#play-again").addEventListener("click", () => {
+          startGame();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        return finale;
+      }
+
+      function renderRound(round, total) {
+        const family = FAMILIES[round.family];
+        const section = document.createElement("section");
+        section.className = "round";
+        section.dataset.index = String(round.index);
+        const showIntro = round.index < 2;
+        section.innerHTML = `
+          <div class="round-top">
+            <span class="round-index">Round ${round.index + 1} / ${total}</span>
+            <h2 class="round-prompt"></h2>
+          </div>
+          ${showIntro ? `<p class="round-note">${INTRO_NOTES[round.family]}</p>` : ""}
+          <div class="stage">
+            <video muted loop playsinline controls preload="metadata"></video>
+          </div>
+          <div class="guesses"></div>
+          <div class="reveal" hidden></div>
+        `;
+        section.querySelector(".round-prompt").textContent = family.prompt;
+        const video = section.querySelector("video");
+        video.src = round.clip.path;
+        video.addEventListener("loadeddata", () => {
+          video.play().catch(() => {});
+        });
+
+        const guesses = section.querySelector(".guesses");
+        const reveal = section.querySelector(".reveal");
+
+        for (const option of family.options) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = option.label;
+          btn.className =
+            option.authenticity === "genuine" ? "is-pick-genuine" : "is-pick-fake";
+          btn.addEventListener("click", () => {
+            if (section.dataset.answered === "1") return;
+            section.dataset.answered = "1";
+
+            const isCorrect = option.key === round.clip.type;
+            answered += 1;
+            if (isCorrect) correct += 1;
+            updateProgress();
+
+            for (const other of guesses.querySelectorAll("button")) {
+              other.disabled = true;
+              const label = other.textContent;
+              if (label === round.clip.type) other.classList.add("is-correct");
+              if (other === btn && !isCorrect) other.classList.add("is-wrong");
+            }
+
+            reveal.hidden = false;
+            reveal.innerHTML = `
+              <p class="reveal-result ${isCorrect ? "is-correct" : "is-wrong"}">
+                ${isCorrect ? "Correct" : "Wrong"}
+              </p>
+              <p class="reveal-detail">
+                Answer: <strong>${round.clip.type}</strong>
+                · Author: <strong>${round.clip.student}</strong>
+              </p>
+            `;
+
+            const next = section.nextElementSibling;
+            if (next) {
+              setTimeout(() => scrollToEl(next), 3000);
+            }
+            if (answered >= ROUND_COUNT) {
+              const finale = buildFinale();
+              feed.appendChild(finale);
+              setTimeout(() => scrollToEl(finale), 3000);
+            }
+          });
+          guesses.appendChild(btn);
+        }
+
+        return section;
+      }
+
+      function startGame() {
+        feed.innerHTML = "";
+        answered = 0;
+        correct = 0;
+        updateProgress();
+
+        let rounds;
+        try {
+          rounds = pickRounds(allClips);
+        } catch (error) {
+          status.hidden = false;
+          status.textContent = error.message || String(error);
+          return;
+        }
+
+        for (const round of rounds) {
+          feed.appendChild(renderRound(round, rounds.length));
+        }
+        playVisibleVideos();
+      }
+
+      window.addEventListener("scroll", () => {
+        window.clearTimeout(window.__gameScrollTimer);
+        window.__gameScrollTimer = window.setTimeout(playVisibleVideos, 80);
+      }, { passive: true });
+
+      try {
+        let res = await fetch("module-c/videos-web.json");
+        if (!res.ok) res = await fetch("module-c/videos.json");
+        if (!res.ok) throw new Error(`Could not load video list (${res.status})`);
+        const data = await res.json();
+        const files = Array.isArray(data.files) ? data.files : [];
+        allClips = files
+          .map((file) => {
+            const type = detectType(file);
+            if (!type) return null;
+            return {
+              file,
+              path: `module-c/submissions-web/${encodeURIComponent(file).replace(/%2F/g, "/")}`,
+              student: parseStudent(file),
+              type: type.key,
+              family: type.family,
+              authenticity: type.authenticity,
+            };
+          })
+          .filter(Boolean);
+
+        if (allClips.length < ROUND_COUNT) {
+          throw new Error(`Need at least ${ROUND_COUNT} typed videos; found ${allClips.length}.`);
+        }
+
+        startGame();
+      } catch (error) {
+        status.hidden = false;
+        status.textContent = error.message || String(error);
+        progressEl.textContent = "Error";
+      }
+    </script>
+  </body>
+</html>

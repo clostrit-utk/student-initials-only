@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web encode test — Module C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syncopate:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #090909;
+        --cream: #e8dcc8;
+        --muted: rgba(232, 220, 200, 0.55);
+        --border: rgba(232, 220, 200, 0.12);
+        --ok: #7ec8a0;
+        --warn: #d4a574;
+        --mono: "DM Mono", monospace;
+        --display: "Syncopate", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--cream);
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .kicker {
+        margin: 0;
+        color: var(--muted);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+      h1 {
+        margin: 0.35rem 0 0;
+        font-family: var(--display);
+        font-size: clamp(1rem, 2.8vw, 1.4rem);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      a {
+        color: var(--cream);
+      }
+      .note {
+        margin: 0;
+        padding: 0.85rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+        max-width: 70rem;
+      }
+      .board {
+        padding: 1.25rem 1.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .case-title {
+        margin: 0 0 0.65rem;
+        font-family: var(--display);
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      @media (max-width: 800px) {
+        .pair {
+          grid-template-columns: 1fr;
+        }
+      }
+      .side {
+        min-width: 0;
+      }
+      .side-label {
+        margin: 0 0 0.35rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .side-label strong {
+        color: var(--cream);
+        font-weight: 500;
+      }
+      .stats {
+        margin: 0.35rem 0 0;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .stats .ok {
+        color: var(--ok);
+      }
+      .stats .warn {
+        color: var(--warn);
+      }
+      video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        object-fit: contain;
+      }
+      .empty {
+        padding: 2rem 1.5rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="kicker">Prompting Impact · Fall 2026</p>
+        <h1>Web encode test</h1>
+      </div>
+      <div>
+        <a href="module-c-results.html">← Results</a>
+      </div>
+    </header>
+
+    <p class="note">
+      Originals copied into <code>module-c/web-test/before</code>. Encodes in
+      <code>after</code>: H.264, max long edge 1080, CRF 28, AAC 96k, faststart.
+      Originals in submissions are untouched. 40 files are currently over 5&nbsp;MB.
+    </p>
+
+    <p class="empty" id="status" hidden></p>
+    <div class="board" id="board"></div>
+
+    <script type="module">
+      const board = document.getElementById("board");
+      const status = document.getElementById("status");
+
+      function fmtMB(bytes) {
+        return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+      }
+
+      function fmtBitrate(bps) {
+        if (!bps) return "—";
+        return `${(bps / 1000).toFixed(0)} kbps`;
+      }
+
+      function sideHTML(kind, info, ratioEl) {
+        const under = info.bytes <= 5 * 1024 * 1024;
+        const sizeClass = under ? "ok" : "warn";
+        const sizeNote = under ? "under 5 MB" : "still over 5 MB";
+        return `
+          <div class="side">
+            <div class="side-label">
+              <strong>${kind}</strong>
+              <span>${info.width}×${info.height} · ${info.codec}</span>
+            </div>
+            <video controls playsinline preload="metadata" src="${info.path}"></video>
+            <p class="stats">
+              <span class="${sizeClass}">${fmtMB(info.bytes)}</span>
+              · ${fmtBitrate(info.bitrate)}
+              · ${info.duration.toFixed(1)}s
+              · <span class="${sizeClass}">${sizeNote}</span>
+              ${ratioEl || ""}
+            </p>
+          </div>
+        `;
+      }
+
+      try {
+        const res = await fetch("module-c/web-test/manifest.json");
+        if (!res.ok) throw new Error(`Could not load manifest (${res.status})`);
+        const cases = await res.json();
+
+        for (const item of cases) {
+          const pct = ((item.after.bytes / item.before.bytes) * 100).toFixed(1);
+          const section = document.createElement("section");
+          section.innerHTML = `
+            <h2 class="case-title"></h2>
+            <div class="pair"></div>
+          `;
+          section.querySelector(".case-title").textContent = item.label;
+          section.querySelector(".pair").innerHTML =
+            sideHTML("Before", item.before) +
+            sideHTML(
+              "After",
+              item.after,
+              `· <span class="ok">${pct}% of original</span>`
+            );
+          board.appendChild(section);
+        }
+      } catch (error) {
+        status.hidden = false;
+        status.textContent = error.message || String(error);
+      }
+    </script>
+  </body>
+</html>

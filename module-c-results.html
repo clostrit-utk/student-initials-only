@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module C Results — Prompting Impact Fall 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syncopate:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #090909;
+        --cream: #e8dcc8;
+        --muted: rgba(232, 220, 200, 0.55);
+        --border: rgba(232, 220, 200, 0.12);
+        --red: #c8102e;
+        --mono: "DM Mono", monospace;
+        --display: "Syncopate", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--cream);
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .kicker {
+        margin: 0;
+        color: var(--muted);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+      h1 {
+        margin: 0.35rem 0 0;
+        font-family: var(--display);
+        font-size: clamp(1.1rem, 3vw, 1.6rem);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .meta {
+        color: var(--muted);
+        text-align: right;
+      }
+      a {
+        color: var(--cream);
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1rem;
+        align-items: center;
+        padding: 0.85rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .toolbar-label {
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+      button {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--cream);
+        font: inherit;
+        padding: 0.45rem 0.8rem;
+        cursor: pointer;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+      button:hover,
+      button.is-active {
+        border-color: var(--cream);
+        background: rgba(232, 220, 200, 0.08);
+      }
+      .board {
+        padding: 1rem 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+      }
+      .group-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin: 0 0 0.4rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.35rem;
+      }
+      .group-title {
+        margin: 0;
+        font-family: var(--display);
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--cream);
+      }
+      .def-toggle {
+        appearance: none;
+        border: 0;
+        background: none;
+        padding: 0;
+        color: var(--muted);
+        font: inherit;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .def-toggle:hover,
+      .def-toggle[aria-expanded="true"] {
+        color: var(--cream);
+        border-color: transparent;
+        background: none;
+      }
+      .group-def {
+        margin: 0 0 0.75rem;
+        max-width: 52rem;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .group-def[hidden] {
+        display: none;
+      }
+      .group-def strong {
+        color: var(--cream);
+        font-weight: 500;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 0.35rem;
+      }
+      .clip {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        border: 0;
+      }
+      .clip-meta {
+        margin: 0 0 0.15rem;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        min-height: 1.15em;
+      }
+      video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        object-fit: contain;
+      }
+      .empty {
+        padding: 2rem 1.5rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="kicker">Prompting Impact · Fall 2026</p>
+        <h1>Module C Results</h1>
+      </div>
+      <div class="meta">
+        <a href="index.html">← Course site</a>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <span class="toolbar-label">Sort</span>
+      <button type="button" class="is-active" id="sort-student" data-sort="student">By student</button>
+      <button type="button" id="sort-type" data-sort="type">By type</button>
+      <span class="toolbar-label">Audio</span>
+      <button type="button" id="unmute-all">Play all sound</button>
+      <button type="button" id="mute-all">Mute all</button>
+    </div>
+
+    <p class="empty" id="status" hidden></p>
+    <div class="board" id="board"></div>
+
+    <script type="module">
+      const TYPES = [
+        { key: "Genuine Real", pattern: /genuine[_\s-]*real/i },
+        { key: "Fake Real", pattern: /fake[_\s-]*real/i },
+        { key: "Genuine Glitch", pattern: /genuine[_\s-]*glitch/i },
+        { key: "Fake Glitch", pattern: /fake[_\s-]*glitch/i },
+      ];
+      const TYPE_ORDER = Object.fromEntries(TYPES.map((t, i) => [t.key, i]));
+
+      const TYPE_DEFINITIONS = {
+        "Genuine Real":
+          "A <strong>genuine real</strong> video is captured without the use of AI in any fashion. A <strong>fake real</strong> video attempts to look real, but is actually produced with generative AI.",
+        "Fake Real":
+          "A <strong>genuine real</strong> video is captured without the use of AI in any fashion. A <strong>fake real</strong> video attempts to look real, but is actually produced with generative AI.",
+        "Genuine Glitch":
+          "A <strong>genuine glitch</strong> is the result of directly modifying the raw data of a video file in a manner that produces a noticeable visual effect that doesn’t completely undermine the content of the video. Or, the use of generative AI to a point of secondary failure. Six fingers on a human hand is a classic example. A <strong>fake glitch</strong> shortcuts the process by producing something that mimics those effects with a filter or by explicitly prompting an AI to make something that looks like a glitch.",
+        "Fake Glitch":
+          "A <strong>genuine glitch</strong> is the result of directly modifying the raw data of a video file in a manner that produces a noticeable visual effect that doesn’t completely undermine the content of the video. Or, the use of generative AI to a point of secondary failure. Six fingers on a human hand is a classic example. A <strong>fake glitch</strong> shortcuts the process by producing something that mimics those effects with a filter or by explicitly prompting an AI to make something that looks like a glitch.",
+      };
+
+      function typeRank(type) {
+        return TYPE_ORDER[type] ?? TYPES.length;
+      }
+
+      const FIRST_OVERRIDES = {
+        brooklynrain: "Brooklyn Rain",
+        emilyimogene: "Emily Imogene",
+        cameronben: "Cameron Ben",
+        madelinejean: "Madeline Jean",
+        meimcdonald: "Mei Mcdonald",
+        anthonypeter: "Anthony Peter",
+        hunterjames: "Hunter James",
+      };
+
+      const board = document.getElementById("board");
+      const status = document.getElementById("status");
+      const sortStudentBtn = document.getElementById("sort-student");
+      const sortTypeBtn = document.getElementById("sort-type");
+      const unmuteAllBtn = document.getElementById("unmute-all");
+      const muteAllBtn = document.getElementById("mute-all");
+
+      /** @type {Array<{ file: string, path: string, student: string, type: string }>} */
+      let clips = [];
+      let sortMode = "student";
+      let soundOn = false;
+
+      function titleCase(token) {
+        if (!token) return "";
+        return token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+      }
+
+      function detectType(filename) {
+        for (const type of TYPES) {
+          if (type.pattern.test(filename)) return type.key;
+        }
+        return "Unknown";
+      }
+
+      function parseStudent(filename) {
+        const lower = filename.toLowerCase();
+        if (lower.startsWith("imposter2")) return "Imposter 2";
+        if (lower.startsWith("imposter")) return "Imposter 1";
+
+        const parts = filename.split("_");
+        if (parts.length < 4) return filename;
+
+        const prefix = parts[0].toLowerCase();
+        let lastToken = parts[3].replace(/^([a-z]\.)+/i, "");
+        const lastNorm = lastToken.toLowerCase().replace(/[^a-z0-9]/g, "");
+        if (!lastNorm || !prefix.startsWith(lastNorm)) {
+          return titleCase(prefix);
+        }
+        const firstNorm = prefix.slice(lastNorm.length);
+        const firstName = FIRST_OVERRIDES[firstNorm] || titleCase(firstNorm);
+        const lastName = titleCase(lastToken);
+        return `${firstName} ${lastName}`.trim();
+      }
+
+      function allVideos() {
+        return [...board.querySelectorAll("video")];
+      }
+
+      function applyAudioState() {
+        for (const video of allVideos()) {
+          video.muted = !soundOn;
+          if (soundOn) {
+            video.play().catch(() => {});
+          }
+        }
+        unmuteAllBtn.classList.toggle("is-active", soundOn);
+        muteAllBtn.classList.toggle("is-active", !soundOn);
+      }
+
+      function render() {
+        board.innerHTML = "";
+
+        /** @type {Map<string, typeof clips>} */
+        const groups = new Map();
+        const sorted = [...clips].sort((a, b) => {
+          if (sortMode === "student") {
+            return (
+              a.student.localeCompare(b.student) ||
+              typeRank(a.type) - typeRank(b.type) ||
+              a.file.localeCompare(b.file)
+            );
+          }
+          return (
+            typeRank(a.type) - typeRank(b.type) ||
+            a.student.localeCompare(b.student) ||
+            a.file.localeCompare(b.file)
+          );
+        });
+
+        if (sortMode === "type") {
+          for (const { key } of TYPES) groups.set(key, []);
+          groups.set("Unknown", []);
+        }
+
+        for (const clip of sorted) {
+          const key = sortMode === "student" ? clip.student : clip.type;
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(clip);
+        }
+
+        for (const [title, groupClips] of groups) {
+          if (!groupClips.length) continue;
+          const section = document.createElement("section");
+          section.className = "group";
+          const def = sortMode === "type" ? TYPE_DEFINITIONS[title] : null;
+          section.innerHTML = def
+            ? `<div class="group-heading">
+                <h2 class="group-title"></h2>
+                <button type="button" class="def-toggle" aria-expanded="false">Definition</button>
+              </div>
+              <p class="group-def" hidden></p>
+              <div class="grid"></div>`
+            : `<div class="group-heading"><h2 class="group-title"></h2></div><div class="grid"></div>`;
+          section.querySelector(".group-title").textContent = title;
+          if (def) {
+            const defEl = section.querySelector(".group-def");
+            const toggle = section.querySelector(".def-toggle");
+            defEl.innerHTML = def;
+            toggle.addEventListener("click", () => {
+              const open = defEl.hasAttribute("hidden");
+              if (open) defEl.removeAttribute("hidden");
+              else defEl.setAttribute("hidden", "");
+              toggle.setAttribute("aria-expanded", open ? "true" : "false");
+              toggle.textContent = open ? "Hide definition" : "Definition";
+            });
+          }
+          const grid = section.querySelector(".grid");
+
+          for (const clip of groupClips) {
+            const item = document.createElement("article");
+            item.className = "clip";
+            item.innerHTML = `
+              <p class="clip-meta"></p>
+              <video muted loop autoplay playsinline controls preload="auto"></video>
+            `;
+            const meta = item.querySelector(".clip-meta");
+            meta.textContent = sortMode === "type" ? clip.student : clip.type;
+            const video = item.querySelector("video");
+            video.src = clip.path;
+            video.muted = !soundOn;
+            video.addEventListener("loadeddata", () => {
+              video.play().catch(() => {});
+            });
+            grid.appendChild(item);
+          }
+
+          board.appendChild(section);
+        }
+
+        applyAudioState();
+      }
+
+      sortStudentBtn.addEventListener("click", () => {
+        sortMode = "student";
+        sortStudentBtn.classList.add("is-active");
+        sortTypeBtn.classList.remove("is-active");
+        render();
+      });
+
+      sortTypeBtn.addEventListener("click", () => {
+        sortMode = "type";
+        sortTypeBtn.classList.add("is-active");
+        sortStudentBtn.classList.remove("is-active");
+        render();
+      });
+
+      unmuteAllBtn.addEventListener("click", () => {
+        soundOn = true;
+        applyAudioState();
+      });
+
+      muteAllBtn.addEventListener("click", () => {
+        soundOn = false;
+        applyAudioState();
+      });
+
+      try {
+        const res = await fetch("module-c/videos.json");
+        if (!res.ok) throw new Error(`Could not load videos.json (${res.status})`);
+        const data = await res.json();
+        const files = Array.isArray(data.files) ? data.files : [];
+
+        if (!files.length) {
+          status.hidden = false;
+          status.textContent = "No videos listed in module-c/videos.json.";
+        }
+
+        clips = files.map((file) => ({
+          file,
+          path: `module-c/submissions-web/${encodeURIComponent(file).replace(/%2F/g, "/")}`,
+          student: parseStudent(file),
+          type: detectType(file),
+        }));
+
+        muteAllBtn.classList.add("is-active");
+        render();
+      } catch (error) {
+        status.hidden = false;
+        status.textContent = error.message || String(error);
+      }
+    </script>
+  </body>
+</html>
